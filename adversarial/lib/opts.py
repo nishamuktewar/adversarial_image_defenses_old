@@ -92,6 +92,11 @@ def _setup_common_args(parser):
                         help='List of defense to apply like tvm, quilting')
     parser.add_argument('--pretrained', default=False, action='store_true',
                         help='use pretrained model from model-zoo')
+    parser.add_argument('--transfer_learning', default=True, action='store_true',
+                        help='use pretrained model based on transfer learning')
+    parser.add_argument('--transfer_learning_numclasses', default=1000, type=int,  metavar='N',
+                        help='specify numclasses if using transfer learning')
+
 
     # Defense params
     # TVM

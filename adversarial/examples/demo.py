@@ -10,6 +10,11 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+'''
+import sys
+sys.path.append("/home/nisha/faiss")
+'''
+
 import pkgutil
 if pkgutil.find_loader("adversarial") is not None:
     # If module is installed using "pip install ."

@@ -19,11 +19,17 @@ from lib.util import load_checkpoint
 import lib.constants as constants
 
 
-def _load_torchvision_model(model, pretrained=True):
+def _load_torchvision_model(model, pretrained=True, transfer_learning=False, transfer_learning_numclasses=1000):
     assert hasattr(models, model), (
         "Model {} is not available in torchvision.models."
         "Supported models are: {}".format(model, constants.MODELS))
-    model = getattr(models, model)(pretrained=pretrained)
+    if transfer_learning:
+        model = getattr(models, model)(pretrained=False)
+        num_ftrs = model.fc.in_features
+        model.fc = nn.Linear(num_ftrs, transfer_learning_numclasses)
+        print(model)
+    else:
+        model = getattr(models, model)(pretrained=pretrained)   
     return model
 
 
@@ -102,8 +108,10 @@ def get_model(args, load_checkpoint=False, defense_name=None, training=False):
         model = InceptionResnetV2()
     else:
         model = _load_torchvision_model(args.model,
-                                        pretrained=args.pretrained)
+                                        pretrained=args.pretrained,
+                                        transfer_learning=args.transfer_learning, transfer_learning_numclasses=args.transfer_learning_numclasses)
 
+    print("| transfer_learning: %s" % args.transfer_learning)
     # inceptionresnetv2 from adversarial ensemble training at checkpoint
     # is not saved with DataParallel
     # TODO: Save it with DataParallel to cleanup code below
