@@ -1,4 +1,8 @@
 *.pyc
+/adversarial/*.pyc
+/adversarial/lib/*.pyc
+/adversarial/lib/datasets/*.pyc
+/adversarial/lib/models/*.pyc
+/adversarial/lib/transformations/*.pyc
 /adversarial.egg-info/**
-/adversarial/**
 /build/**
