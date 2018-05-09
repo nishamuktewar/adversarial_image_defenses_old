@@ -1,0 +1,4 @@
+*.pyc
+/adversarial.egg-info/**
+/adversarial/**
+/build/**

@@ -24,6 +24,7 @@ def _load_torchvision_model(model, pretrained=True, transfer_learning=False, tra
         "Model {} is not available in torchvision.models."
         "Supported models are: {}".format(model, constants.MODELS))
     if transfer_learning:
+        print('| transfer learning - loading model')
         model = getattr(models, model)(pretrained=False)
         num_ftrs = model.fc.in_features
         model.fc = nn.Linear(num_ftrs, transfer_learning_numclasses)

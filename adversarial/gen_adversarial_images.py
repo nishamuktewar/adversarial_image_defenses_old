@@ -146,6 +146,7 @@ def generate_adversarial_images(args):
     assert AdversaryType.has_value(args.adversary_to_generate), \
         "\"{}\" adversary_to_generate not defined".format(args.adversary_to_generate)
 
+    print('| Welcome to generate adv images')
     defense_name = None if not args.defenses else args.defenses[0]
     data_indices = _get_data_indices(args)
     data_type = args.data_type if args.data_type == "train" else "valid"
